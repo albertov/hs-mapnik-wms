@@ -1,5 +1,5 @@
 resolver: lts-5.12
 packages:
 - '.'
-- location: '../hs-mapnik'
+- location: 'submodules/hs-mapnik'
   extra-dep: true

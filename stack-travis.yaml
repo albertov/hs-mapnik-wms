@@ -1,9 +1,7 @@
 resolver: lts-5.12
 packages:
 - '.'
-- location:
-    git: https://github.com/albertov/hs-mapnik.git
-    commit: de879fd0fb5648d427fc824f4ae90c0df27d857f
+- location: 'submodules/hs-mapnik'
   extra-dep: true
 
 ghc-options:
