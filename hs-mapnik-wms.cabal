@@ -1,0 +1,57 @@
+name:                hs-mapnik-wms
+version:             0.1.0.0
+synopsis:            Haskell WMS implementation using Mapnik
+homepage:            https://github.com/albertov/hs-mapnik-wms
+license:             BSD3
+license-file:        LICENSE
+author:              Alberto Valverde González
+maintainer:          alberto@toscat.net
+copyright:           2016 Alberto Valverde González - Meteogrid
+category:            Web
+build-type:          Simple
+cabal-version:       >=1.10
+
+flag server
+  description: Build WMS server app
+  default: True
+  manual: True
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     Mapnik.WMS
+  build-depends:       base         >= 4.7 && < 5
+                     , servant
+                     , servant-server
+                     , hs-mapnik
+  default-language:    Haskell2010
+  ghc-options:         -Wall
+                       -Werror
+                       -fwarn-incomplete-patterns
+                       -fwarn-incomplete-uni-patterns
+
+executable hs-mapnik-wms
+  main-is:             Main.hs
+  build-depends:       base >=4.8 && <5
+                     , hs-mapnik-wms 
+  hs-source-dirs:      app
+  default-language:    Haskell2010
+  if !flag(server)
+    Buildable: False
+
+test-suite spec
+  type:             exitcode-stdio-1.0
+  build-depends:    base
+                  , hspec
+                  , hspec-core >= 1.13
+                  , hs-mapnik-wms
+
+  hs-source-dirs:   spec
+  main-is:          Spec.hs
+  other-modules:    Mapnik.WMSSpec
+  default-language: Haskell2010
+  ghc-options:     -Wall -rtsopts -threaded -with-rtsopts=-N
+
+
+source-repository head
+  type:     git
+  location: https://github.com/albertov/hs-mapnik
